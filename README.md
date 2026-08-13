@@ -39,7 +39,8 @@ O script segue a ordem em que os comandos foram executados no lab. As etapas des
 ## Evidência
 
 Confirmação de que a criptografia foi aplicada com sucesso nos dois discos (OS disk e Data disk), via `az vm encryption show`:
-![alt text](image.png)
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/a42f2901-f849-4584-8a5b-b0b3a0688a6f" />
+
 
 ## Problemas encontrados
 
