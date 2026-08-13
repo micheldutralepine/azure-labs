@@ -3,4 +3,4 @@ Laboratórios práticos de estudo em Azure, documentando cenários reais. Cada b
 
 ## Labs
 
-1. [VM Disk Encryption via CLI](https://github.com/micheldutralepine/azure-labs/tree/Lab1-vm-disk-encryption-via-CLI-AZ-104) — Criação de VM Windows Spot, disco de dados adicional e Azure Disk Encryption via Key Vault utilizando AZ CLI
+1. [VM Disk Encryption via CLI](https://github.com/micheldutralepine/azure-labs/tree/Lab1-vm-disk-encryption-AZ-104) — Criação de VM Windows Spot, disco de dados adicional e Azure Disk Encryption via Key Vault utilizando AZ CLI
