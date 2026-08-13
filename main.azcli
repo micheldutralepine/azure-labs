@@ -1,0 +1,56 @@
+#Login
+az login
+az login --tenant 88436f73-6ea0-41ab-960a-90415a5bf06d
+
+#Parameters
+rg=rg-estudos
+local=australiaeast
+vm=vm-estudosCLI
+img=Win2022Datacenter
+user=michel
+pass=xxxxxxxx
+disk=disk-vmencrypt
+key=keyencrypt
+vnet=vnet-australiaeast-1
+subnet=snet-australiaeast-1
+kv=dvdiskencrypt
+
+
+
+#Criar VM
+az vm create -g $rg -n $vm --image $img --size Standard_D2s_v5 --admin-username $user --admin-password $pass --os-disk-name $disk --vnet-name $vnet --subnet $subnet --priority Spot --eviction-policy Deallocate --max-price -1  
+
+#listar Disks
+az disk list -g $rg -o table
+
+#detalhe do disk
+az disk show -g $rg -n $disk -o table
+az disk show -g $rg -n $disk --query encryptionSettingsCollection
+
+#adicionando Disk
+az vm disk attach -g $rg --vm-name $vm --name encryptdik2 --new --size-gb 4
+
+#criar key vault
+az provider register --namespace Microsoft.KeyVault
+az provider show --namespace Microsoft.KeyVault --query registrationState
+az keyvault create -g $rg -n $kv -l $local --enabled-for-disk-encryption
+
+#Me dando acesso
+myobjectid=$(az ad signed-in-user show --query id -o tsv)
+kvid=$(az keyvault show -n $kv -g $rg --query id -o tsv)
+MSYS_NO_PATHCONV=1 az role assignment create --role "Key Vault Administrator" --assignee $myobjectid --scope $kvid
+
+#criar key
+az keyvault key create --vault-name $kv -n $key --kty RSA --size 4096
+
+#criptogrando o disk
+az vm encryption enable -g $rg -n $vm --disk-encryption-keyvault $kv --key-encryption-key $key
+
+#verificando
+az vm encryption show -g $rg -n $vm
+
+#Desativar a encryption
+az vm encryption disable -g $rg -n $vm --volume-type ALL
+
+#Deletando
+az group delete -n $rg
