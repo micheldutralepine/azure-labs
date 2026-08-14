@@ -1,4 +1,4 @@
-# azure-labs
+# azure-labs az-104
 Laboratórios práticos de estudo em Azure, documentando cenários reais. Cada branch é um projeto/laboratório azure.
 
 ## Labs
