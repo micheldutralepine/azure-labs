@@ -58,6 +58,9 @@ docker push containeracr.azurecr.io/site-html
 
 Comandos completos em [`container.azcli`](./container.azcli).
 
+Antes do push, o container foi validado rodando localmente via Docker Desktop (porta `8080:80`), confirmando que a imagem servia o conteúdo corretamente antes de subir para o Azure:
+![Container rodando localmente no Docker Desktop](./docs/screenshots/00-docker-desktop-local-container.png)
+
 ### 2. Criação do Web App conectado ao ACR
 
 O App Service foi configurado na aba **Container** durante a criação, apontando diretamente para a imagem hospedada no ACR.
