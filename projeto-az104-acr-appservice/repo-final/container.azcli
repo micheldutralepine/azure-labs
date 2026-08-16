@@ -1,0 +1,15 @@
+az login
+
+docker build -t site-html . 
+
+az acr login --name containerACR
+
+docker tag site-html containeracr.azurecr.io/site-html 
+
+docker push containeracr.azurecr.io/site-html
+
+docker pull containeracr.azurecr.io/site-html
+
+docker run -d -p 8080:80 containeracr.azurecr.io/site-html
+
+docker container ls
